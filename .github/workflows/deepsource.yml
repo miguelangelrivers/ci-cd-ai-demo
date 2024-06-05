@@ -1,0 +1,22 @@
+name: Integración con DeepSource
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v2
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Ejecutar análisis con DeepSource
+        run: deepsource analyze
+        env:
+          DEEPSOURCE_API_KEY: ${{ secrets.DEEPSOURCE_API_KEY }}
